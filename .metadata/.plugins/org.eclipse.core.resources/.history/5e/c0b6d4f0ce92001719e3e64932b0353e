@@ -1,0 +1,47 @@
+package com906.E;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class ServerTest {
+
+	public static void main(String[] args) {
+		ServerSocket ss=null;
+		Socket socket=null;
+		OutputStream os=null;
+		
+		try {
+			ss=new ServerSocket(8888);
+			socket=ss.accept();
+			os=socket.getOutputStream();
+			
+			os.write("hai hei ha".getBytes());
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if(socket!=null)
+			{
+				try {
+					socket.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(os!=null)
+			{
+				try {
+					os.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+}

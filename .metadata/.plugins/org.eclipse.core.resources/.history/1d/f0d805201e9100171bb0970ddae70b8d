@@ -1,0 +1,32 @@
+package com904.E;
+
+public class Some {
+
+	public static void main(String[] args) {
+		Myt m=new Myt("haha");
+		m.start();
+		
+		Myt m1=new Myt("heihei");
+		m1.start();
+		m1.run();
+//		m1.start();
+		
+	}
+
+}
+
+class Myt extends Thread{
+	
+	public Myt(String n)
+	{
+		super(n);
+	}
+	
+	@Override
+	public void run() {
+		for(int i=0;i<100;i++)
+		{
+			System.out.println(i+": "+getName());
+		}
+	}
+}

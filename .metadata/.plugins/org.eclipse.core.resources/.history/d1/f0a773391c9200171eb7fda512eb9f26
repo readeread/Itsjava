@@ -1,0 +1,62 @@
+package com905.E;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class Some1 {
+	public static void main(String[] args) {
+		URL url;
+		InputStream is=null;
+		BufferedInputStream bis=null;
+		BufferedOutputStream bos=null;
+		OutputStream os=null;
+		try {
+			url = new URL("thunder://QUFmdHA6Ly95Z2R5ODp5Z2R5OEB5ZzQ0LmR5ZHl0dC5uZXQ6NzAwNy9bJUU5JTk4JUIzJUU1JTg1JTg5JUU3JTk0JUI1JUU1JUJEJUIxd3d3LnlnZHk4LmNvbV0uMjYlRTclQTclOEQlRTYlQUQlQkIlRTYlQjMlOTUyLjUlRUYlQkMlOUFNJUU1JThGJUI3JUU2JUExJUEzJUU2JUExJTg4LkhELjcyMHAuJUU0JUI4JUFEJUU4JThCJUIxJUU1JThGJThDJUU1JUFEJTk3JUU1JUI5JTk1LnJtdmJaWg==");
+			is=url.openStream();
+			bis=new BufferedInputStream(is);
+			
+			os=new FileOutputStream("D:\\jsrs.rmvb");
+			bos=new BufferedOutputStream(os);
+			
+			int len=0;
+			byte[] b=new byte[1024];
+			
+			while((len=bis.read(b))!=-1)
+			{
+				bos.write(b, 0, len);
+			}
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if(bos!=null)
+			{
+				try {
+					bos.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(bis!=null)
+			{
+				try {
+					bis.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+}

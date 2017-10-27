@@ -1,0 +1,50 @@
+package com901.E;
+
+import java.util.Scanner;
+
+/*由控制台按照固定格式输入学生信息，包括学号，姓名，年龄信息，当输入的内容为
+exit退出；将输入的学生信息分别封装到一个Student对象中，再将每个Student对象加
+入到一个集合中，要求集合中的元素按照年龄大小正序排序；最后遍历集合，将集合中
+学生信息写入到记事本，每个学生数据占单独一行。*/
+public class No8_sort {
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		int i=1;
+		
+		while(true)
+		{
+			System.out.println("请输入第"+i+"个学生学号");
+			int a;
+		}
+	}
+}
+
+
+class Student{
+	private int id;
+	private String name;
+	private int age;
+	public Student(int id, String name, int age) {
+		this.id = id;
+		this.name = name;
+		this.age = age;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+}

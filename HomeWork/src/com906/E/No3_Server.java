@@ -1,0 +1,203 @@
+package com906.E;
+//3、编写一个聊天室，一个服务端，多个客户端。
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
+//import java.util.Scanner;
+import java.util.Scanner;
+
+public class No3_Server {
+
+	public static void main(String[] args) {
+		ArrayList<Socket> list=new ArrayList<>();
+		ServerSocket ss=null;
+		Socket socket=null;
+		OutputStream os=null;
+		InputStream is=null;
+		
+		try {
+			ss=new ServerSocket(8889);
+			while(true)//接收多个客户端
+			{
+				socket=ss.accept();
+				list.add(socket);
+				
+				new Thread(new ServerReadsNo3(socket,list)).start();
+//				new Thread(new ServerWrites(socket)).start();
+				
+			}
+			
+			/*is=socket.getInputStream();
+			os=socket.getOutputStream();
+			
+			int len=0;
+			byte[] b=new byte[1024];
+			while((len=is.read(b))!=-1)
+			{
+				System.out.println(new String(b,0,len));
+				socket.shutdownInput();
+				os.write("我已经收到了".getBytes());
+			}*/
+				
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally 
+		{
+			System.out.println("444");
+			/*if(socket!=null)
+			{
+				try {
+					socket.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}*/
+			if(os!=null)
+			{
+				try {
+					os.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(is!=null)
+			{
+				try {
+					is.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}
+	}
+}
+class ServerReadsNo3 implements Runnable{
+	Socket socket;
+	ArrayList<Socket> list;
+	
+	public ServerReadsNo3(Socket socket,ArrayList<Socket> list) {
+		this.socket = socket;
+		this.list=list;
+	}
+	
+	@Override
+	public void run() {
+		InputStream is=null;
+		OutputStream os=null;
+		try {
+			is=socket.getInputStream();
+			
+			
+			int len=0;
+			byte[] b=new byte[1024];
+			
+			while((len=is.read(b))!=-1)
+			{
+				String str=new String(b,0,len);
+//				System.out.println(str);
+				for(Socket s:list)
+				{
+					os=s.getOutputStream();
+					os.write(b,0,len);
+				}
+				
+
+			}
+			return;
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			System.out.println("222");
+			if(is!=null)
+			{
+				try {
+					is.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(socket!=null)
+			{
+				try {
+					socket.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+	
+}
+
+class ServerWritesNo3 implements Runnable{
+	Socket socket;
+	ArrayList<Socket> list;
+	static Scanner in=new Scanner(System.in);
+	
+	public ServerWritesNo3(Socket socket,ArrayList<Socket> list) {
+		this.socket = socket;
+		this.list=list;
+	}
+
+	@Override
+	public void run() {
+		OutputStream os=null;
+		
+		try {
+			os=socket.getOutputStream();
+			
+			while(true)
+			{
+				String con=in.nextLine();
+				os.write(con.getBytes());
+				
+				if(con.equals("bye"))
+				{
+					in.close();
+					System.out.println("关闭了output");
+					socket.shutdownOutput();
+//					socket.shutdownInput();
+					return;
+				}
+			}
+			
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			System.out.println("333");
+			if(os!=null)
+			{
+				try {
+					os.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(socket!=null)
+			{
+				try {
+					socket.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+}

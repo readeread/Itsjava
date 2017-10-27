@@ -1,0 +1,10 @@
+package com906.E;
+//2、单对单聊天，直到其中一方，输入bye时结束对话。
+public class No2_Server {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

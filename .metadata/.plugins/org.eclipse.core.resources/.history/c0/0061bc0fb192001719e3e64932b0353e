@@ -1,0 +1,35 @@
+package com904.E;
+
+import java.io.File;
+import java.io.RandomAccessFile;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+/*多线程复制一个文件。提示：使用多线程复制同一个文件，首先考虑到，文
+件分段。分段后，每一个线程负责复制一段内容。这时，可以使用RandomAccessFile
+来实现分段*/
+public class No9 {
+
+	public static void main(String[] args) {
+		String path="E:\\day15_01复习.wmv";
+		File file=new File(path);
+		ExecutorService es=Executors.newFixedThreadPool(3);
+		Thread th1=new Thread(new Copy());
+		
+	}
+
+}
+
+class Copyy implements Runnable{
+
+	@Override
+	public void run() {
+	}
+	
+	public void copy(File path)
+	{
+		long longth=path.length();
+		RandomAccessFile raf=new RandomAccessFile(path, "r");
+		raf.seek(longth*l);
+	}
+}

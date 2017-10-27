@@ -1,0 +1,41 @@
+package com904.E;
+
+import java.util.Random;
+
+/*1. 请编写一个类，类名为 SubThread, 是 Thread 类的子类。该类中定义了
+含一个字符串参数的构造方法和 run()方法，方法中有一个 for循环，循环一共
+进行5次，循环体先在命令行显示该线程循环了第几次，然后随机休眠小于一秒
+的时间，循环结束后显示线程结束信息：线程名+finished 。 编写一个
+Application程序，并在其中创建 SubThread 类的三个线程对象T1，T2，T3，
+他们的名称分别为Frist,Second,Third,并启动这三个线程*/
+public class No1 {
+	public static void main(String[] args) {
+		new SubThread("First").start();
+		new SubThread("Second").start();
+		new SubThread("Third").start();
+	}
+	
+}
+ 
+class SubThread extends Thread{
+	public SubThread(String str)
+	{
+		super(str);
+	}
+	
+	@Override
+	public void run() {
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println("循环的次数: "+i);
+			try {
+				Thread.sleep(new Random().nextInt(1));
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println(Thread.currentThread().getName()+" finished");
+	}
+}

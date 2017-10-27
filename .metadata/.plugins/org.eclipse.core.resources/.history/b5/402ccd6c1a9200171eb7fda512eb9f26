@@ -1,0 +1,42 @@
+package com905.E;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class Some1 {
+	public static void main(String[] args) {
+		URL url;
+		InputStream is=null;
+		BufferedInputStream bis=null;
+		BufferedOutputStream bos=null;
+		OutputStream os=null;
+		try {
+			url = new URL("https://n.sinaimg.cn/translate/20170904/5Uk5-fykqmrv9565059.png");
+			is=url.openStream();
+			bis=new BufferedInputStream(is);
+			os=new FileOutputStream("D:\\js.jpg");
+			bos=new BufferedOutputStream(os);
+			
+			int len=0;
+			byte[] b=new byte[1024];
+			
+			while((len=bis.read(b))!=-1)
+			{
+				bos.write(b, 0, len);
+			}
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

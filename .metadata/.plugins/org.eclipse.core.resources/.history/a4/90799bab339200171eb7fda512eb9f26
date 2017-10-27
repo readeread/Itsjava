@@ -1,0 +1,20 @@
+package com904.E;
+/*编写一个FileCopy类，可以进行多线程复制文件。并把复制文件进度，使用百分比显示
+出来。注意，这里所说的多线程并不是使用多线程复制同一个文件，而是可以使用这个
+FileCopy，可以同时复制多个文件。提示： 把FileCopy类，定义成为Thread类的子
+类，在run方法里面实现复制的功能。 FileCopy类中，有两个属性，一个是src 源文件，
+一个是dest目标文件*/
+public class No8File {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
+
+class FileCopy extends Thread{
+	private String dest;
+	private String src;
+	
+}

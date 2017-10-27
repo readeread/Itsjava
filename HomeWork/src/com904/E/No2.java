@@ -1,0 +1,47 @@
+package com904.E;
+
+import java.util.Random;
+
+/*2. 请编写一个类，类名为 MulThread,定义含一个字符串的构造方法，并实现
+Runnable接口，接口中的 run()方法如下实现：方法先在命令行显示该线程信息，
+然后随机休眠小于一秒的时间，最后显示线程结束信息：finished+线程名。编
+写一个Application程序，在其中通过 Runnable 创建MUlThread 类的三个线
+程对象T1，T2，T3，并启动这三个线程。*/
+public class No2 {
+
+	public static void main(String[] args) {
+		new Thread(new MulThread("T1")).start();
+		new Thread(new MulThread("T2")).start();
+		new Thread(new MulThread("T3")).start();
+	}
+
+}
+
+class MulThread implements Runnable{
+
+	private String str;
+	public MulThread(String str)
+	{
+//		System.out.println(Thread.currentThread());
+//		Thread.currentThread().setName(str);
+		this.str=str;
+	}
+	
+	@Override
+	public void run() {
+		Thread.currentThread().setName(str);
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println("循环的次数: "+i);
+			try {
+				Thread.sleep(new Random().nextInt(1));
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println(Thread.currentThread().getName()+" finished");
+	}
+	
+}

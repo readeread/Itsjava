@@ -1,0 +1,16 @@
+package com901.E;
+
+import java.io.File;
+
+public class No7_line {
+
+	public static void main(String[] args) {
+		File file=new File(System.getProperty("user.dir"));
+		traval(file);
+	}
+
+	public void traval(File file) 
+	{
+		
+	}
+}
